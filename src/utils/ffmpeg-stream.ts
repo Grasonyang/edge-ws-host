@@ -47,7 +47,13 @@ export class FFmpegStreamer {
     return this.passThrough.write(chunk);
   }
 
-  end(): void {
-    this.passThrough.end();
+  end(): Promise<void> {
+    return new Promise((resolve) => {
+      this.passThrough.end(() => resolve());
+    });
+  }
+
+  getEventDir(): string {
+    return path.dirname(this.outputPath);
   }
 }
