@@ -10,12 +10,15 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "typecheck": "tsc --noEmit",
     "start": "tsx src/server.ts",
-    "dev": "tsx watch src/server.ts"
+    "dev": "tsx watch src/server.ts",
+    "send:example": "tsx scripts/send-example-video.ts",
+    "test:udp-video": "tsx scripts/send-example-video.ts"
   },
   "dependencies": {
     "@fastify/websocket": "^11.2.0",
     "fastify": "^5.8.5",
-    "fluent-ffmpeg": "^2.1.3"
+    "fluent-ffmpeg": "^2.1.3",
+    "ws": "^8.18.3"
   },
   "devDependencies": {
     "@types/fluent-ffmpeg": "^2.1.28",

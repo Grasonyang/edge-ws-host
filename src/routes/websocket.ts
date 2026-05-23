@@ -53,7 +53,7 @@ function spawnDispatcher(eventId: string, eventDir: string) {
 }
 
 export default async function websocketRoutes(fastify: FastifyInstance) {
-    fastify.get('/ws', { websocket: true }, (connection, req: FastifyRequest) => {
+    const websocketHandler = (connection: unknown, req: FastifyRequest) => {
         // @ts-ignore
         const socket = connection as WebSocket;
         // @ts-ignore - Fastify types for query string
@@ -184,5 +184,8 @@ export default async function websocketRoutes(fastify: FastifyInstance) {
         socket.on('error', (err: Error) => {
             console.error('[WS] Error:', err);
         });
-    });
+    };
+
+    fastify.get('/ws', { websocket: true }, websocketHandler);
+    fastify.get('/api/ws', { websocket: true }, websocketHandler);
 }
